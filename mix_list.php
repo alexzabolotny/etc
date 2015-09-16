@@ -94,10 +94,11 @@ function saveIntoCsvFile($fileName, $groups)
 {
     if (($handle = fopen($fileName, "w")) !== false) {
         foreach ($groups as $group) {
+            $line = [];
             foreach ($group as $person) {
-                fputcsv($handle, $person);
+                $line[] = $person[1];
             }
-            fputcsv($handle, array_fill(0, count($person), '-')); //here goes the empty line
+            fputcsv($handle, $line);
         }
         fclose($handle);
     } else {
